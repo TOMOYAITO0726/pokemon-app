@@ -9,22 +9,23 @@ function App() {
 
   useEffect(() => {
     /* 第1引数には実行させたい副作用関数を記述*/
-    const fetchPokemonData = async () => {
+    const fetchPokemonData = async () => {//非同期処理なのでasync関数を付ける
       //全てのポケモンデータを取得
-      let res = await getAllPokemon(initialURL);
+      let res = await getAllPokemon(initialURL);//オブジェクトとして20種類のポケモンのデータが入っている
+      //console.log(res);
       //各ポケモンの詳細なデータを取得
-      loadPokemon(res.results);
-      console.log(res.results);
+       loadPokemon(res.results);//res.resultsには配列として20種類のポケモンのデータが入っている
+       //console.log(res.results);
       setLoading(false);
-    };//非同期処理なのでasync関数を付ける
+    };
     fetchPokemonData();
   }, []);
-  const loadPokemon = async(data) => {
-    let _pokemonData = await Promise.all(
+  const loadPokemon = async(data) => {//res.resultsをdataとして受け取る。
+    let _pokemonData = await Promise.all(//20種類のポケモン一つ一つのURLを読み取っている
       data.map((pokemon) => {
-        //console.log(pokemon);
+        //console.log(pokemon);//pokemonには、nameとurlがループで入っている
         let pokemoRecord = getPokemon(pokemon.url);
-        return pokemoRecord;
+         return pokemoRecord;
       })
     );
     setPokemonData(_pokemonData);
