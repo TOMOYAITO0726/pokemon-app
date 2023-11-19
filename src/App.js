@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import { getAllPokemon } from './utils/pokemon.js';
+import { getAllPokemon, getPokemon } from './utils/pokemon.js';
 
 function App() {
   const initialURL = "https://pokeapi.co/api/v2/pokemon";
   const [loading, setLoading] = useState(true);
+  const [pokemonData, setPokemonData] = useState([]);
 
   useEffect(() => {
     /* 第1引数には実行させたい副作用関数を記述*/
@@ -18,13 +19,19 @@ function App() {
     };//非同期処理なのでasync関数を付ける
     fetchPokemonData();
   }, []);
-  const loadPokemon = (data) => {
-    let _pokemonData = Promise.all(
+  const loadPokemon = async(data) => {
+    let _pokemonData = await Promise.all(
       data.map((pokemon) => {
-        console.log(pokemon);
+        //console.log(pokemon);
+        let pokemoRecord = getPokemon(pokemon.url);
+        return pokemoRecord;
       })
-    )
+    );
+    setPokemonData(_pokemonData);
   };
+
+console.log(pokemonData);
+
   return (
   <div className="App">
     {loading ? (

@@ -5,3 +5,14 @@ export const getAllPokemon = (url) => {
         .then((data) => resolve(data));//dataとして受け取る
     });
 };
+
+export const getPokemon = (url) => {
+    return new Promise((resolve, reject) => {
+        fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+            //console.log(data);
+            resolve(data);
+        });
+    });
+};
