@@ -3,7 +3,7 @@ import "./Card.css";
 
 const Card = ({pokemon}) => {
   return (
-    <div className='Card'>
+    <div className='card'>
         <div className='cardImg'>
             <img src={pokemon.sprites.front_default} alt='' />
         </div>
