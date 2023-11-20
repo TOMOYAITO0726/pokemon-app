@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import { getAllPokemon, getPokemon } from './utils/pokemon.js';
+import Card from './components/Card/Card.js';
 
 function App() {
   const initialURL = "https://pokeapi.co/api/v2/pokemon";
@@ -28,7 +29,7 @@ function App() {
          return pokemoRecord;
       })
     );
-    setPokemonData(_pokemonData);
+    setPokemonData(_pokemonData);//pokemoDataには、20種類のポケモンの詳細なデータ（体重、身長など）が入っている
   };
 
 console.log(pokemonData);
@@ -39,7 +40,11 @@ console.log(pokemonData);
       <h1>ロード中・・・</h1>
     ) : (
       <>
-      <h1>ポケモンデータを取得しました</h1>
+        <div className="pokemonCardContainer">
+          {pokemonData.map((pokemon, i) =>{ //pokemonは各要素の値,iはインデックス
+            return<Card key={i} pokemon={pokemon} />;//keyプロパティにはi,pokemonプロパティには各ポケモンの情報が渡される
+          } )}
+        </div>
       </>
     )}
   </div>
