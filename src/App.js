@@ -37,7 +37,7 @@ function App() {
     setPokemonData(_pokemonData);//pokemoDataには、20種類のポケモンの詳細なデータ（体重、身長など）が入っている
   };
 
-//console.log(pokemonData);
+console.log(pokemonData);
 
 const handleNextPage = async () => {
   setLoading(true);
